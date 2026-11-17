@@ -23,6 +23,7 @@ import {
 } from '@/common/options/combinedPolicy'
 import { configQueryKeys } from '@/common/queries/queryKeys'
 import { PreFormat } from '@/popup/component/PreFormat'
+import { BUILT_IN_PRESETS } from './builtInPresets'
 
 type MountConfigPreset = { config: CombinedPolicy; hash: string; file: string }
 
@@ -49,7 +50,14 @@ export const PresetsList = () => {
       return res.json()
     },
     select: (data) => {
-      return data.configs.mount
+      return [
+        ...BUILT_IN_PRESETS.map((config) => ({
+          config,
+          hash: config.id,
+          file: 'built-in',
+        })),
+        ...data.configs.mount,
+      ]
     },
   })
 
