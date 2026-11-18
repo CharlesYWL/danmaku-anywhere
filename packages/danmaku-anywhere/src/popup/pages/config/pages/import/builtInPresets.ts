@@ -1,8 +1,10 @@
 import type { CombinedPolicy } from '@/common/options/combinedPolicy'
 
-// Plex Web sets document.title to "▶ Show - S1 · E3" while playing an episode
+// Plex Web sets document.title to "▶ Show - S1 · E3" (English UI) or
+// "Show - 第1季 · 第3集" (Chinese UI). Season is intentionally not captured:
+// danmaku sources list each season as its own show, and "Show S1" finds nothing.
 export const PLEX_TITLE_REGEX =
-  '^(?:▶\\s*)?(?<title>.+?)\\s*-\\s*S(?<season>\\d+)\\s*[·•]?\\s*E(?<episode>\\d+)'
+  '^(?:▶\\s*)?(?<title>.+?)\\s*-\\s*(?:S\\d+|第\\s*\\d+\\s*季)\\s*[·•]?\\s*(?:E|第\\s*)(?<episode>\\d+)'
 
 export const PLEX_PRESET: CombinedPolicy = {
   id: 'b7c1a0e2-5d3f-4c8e-9a61-0f2d7e4b9c11',

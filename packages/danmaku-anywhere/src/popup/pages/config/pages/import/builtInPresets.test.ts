@@ -16,13 +16,19 @@ describe('Plex preset', () => {
 
   it('parses the playing tab title', () => {
     const r = parse('▶ 葬送的芙莉莲 - S1 · E3')
-    expect(r.searchTitle).toBe('葬送的芙莉莲 S1')
+    expect(r.searchTitle).toBe('葬送的芙莉莲')
+    expect(r.episode).toBe(3)
+  })
+
+  it('parses the Chinese Plex UI title', () => {
+    const r = parse('学生会也有洞！ - 第1季 · 第3集')
+    expect(r.searchTitle).toBe('学生会也有洞！')
     expect(r.episode).toBe(3)
   })
 
   it('parses a paused title and multi-dash names', () => {
     const r = parse('Re:Zero - Starting Life in Another World - S3 · E12')
-    expect(r.searchTitle).toBe('Re:Zero - Starting Life in Another World S3')
+    expect(r.searchTitle).toBe('Re:Zero - Starting Life in Another World')
     expect(r.episode).toBe(12)
   })
 })
